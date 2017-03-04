@@ -8,7 +8,32 @@
             </form>
         </div>
         {% if property %}
-        <div>{{property}}</div>
+        <div>
+            <h2>Critical Info</h2>
+            <ul>
+                <li><b>Address:</b> {{property.situs_address}}</li>
+                <li><b>Owner Name:</b> {{property.owner_name}}</li>
+                <li><b>Fair Market Cash Value:</b> {{property.fair_cash_market_value}}</li>
+                <li><b>Land Area:</b> {{property.land_area}}</li>
+                <li><b>Zoning:</b> {{property.zoning}}</li>
+                <li><b>Entire Improvements Area:</b>
+                    <ol>
+                    {% for improvement in property.improvements %}
+                        {% for key,value in improvement.items %}
+                        <li><b>{{key}}</b> {{value}}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    </ol>
+                </li>
+            </ul>
+
+            <h2>Images</h2>
+            <ul>
+                {% for image in property.images %}
+                <li><img src="{{image}}" /></li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
     </body>
 </html>
