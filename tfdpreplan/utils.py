@@ -13,7 +13,7 @@ def get_property_data(street_no, street_dir, street_name, street_type):
         'streetno': street_no,
         'predirection': street_dir,
         'streetname': street_name,
-        'streettype': normalize_street_type(street_type),
+        'streettype': street_type,
         'subaddr': 'Search+by+address',
         'accepted': 'accepted',
     }
@@ -62,7 +62,6 @@ def normalize_data_key(key):
     key = re.sub(r'^_|_$', '', key)  # drop underscores at the beginning and end
     return key
 
-
 def normalize_street_type(street_type):
     types = {
         'AV': ['ave', 'avenue'],
@@ -93,3 +92,4 @@ def normalize_street_type(street_type):
                 street_type = st
                 break
     return street_type
+
