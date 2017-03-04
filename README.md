@@ -14,3 +14,13 @@ The Tulsa County assessor makes property information available a this [property 
 http://www.assessor.tulsacounty.org/assessor-property-search.php)link.
 
 
+
+## Property Scraper
+
+```
+pip install -r requirements.txt
+python
+>> from property_scraper import get_property_data
+>> resp = get_property_data('36', 'E', 'Cameron', 'St')
+>> resp.content
+```
