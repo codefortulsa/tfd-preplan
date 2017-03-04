@@ -13,7 +13,7 @@ def get_property_data(street_no, street_dir, street_name, street_type):
         'streetno': street_no,
         'predirection': street_dir,
         'streetname': street_name,
-        'streettype': sanitize_street_type(street_type),
+        'streettype': normalize_street_type(street_type),
         'subaddr': 'Search+by+address',
         'accepted': 'accepted',
     }
@@ -29,34 +29,41 @@ def parse_markup(content):
         'images': [],
     }
     d = PyQuery(content)
+
+    # get quick and general data
     rows = d('#quick table tr, #general table tr')
     for row in rows:
         cells = row.findall('td')
-        key = sanitize_data_key(cells[0].text)
+        key = normalize_data_key(cells[0].text)
         data[key] = cells[1].text
+
+    # get Improvements entries
     headers = []
     for num, row in enumerate(d('#improvements table tr')):
         if num == 0:
-            headers = [sanitize_data_key(c.text) for c in row.findall('th')]
+            headers = [normalize_data_key(c.text) for c in row.findall('th')]
         else:
             cells = row.findall('td')
             data_row = {}
             for i, cell in enumerate(cells):
                 data_row[headers[i]] = cell.text
             data['improvements'].append(data_row)
+
+    # get image urls
     data['images'] = [i.attrib['src'] for i in d('#images table img')]
+
     return data
 
 
-def sanitize_data_key(key):
-    key = key.lower()
-    key = re.sub(r'[^a-z0-9_]', '_', key)
-    key = re.sub(r'_+', '_', key)
-    key = re.sub(r'^_|_$', '', key)
+def normalize_data_key(key):
+    key = key.lower()  # make lowercase
+    key = re.sub(r'[^a-z0-9_]', '_', key)  # limit to alphanumeric and underscores
+    key = re.sub(r'_+', '_', key)  # combine multiple underscores
+    key = re.sub(r'^_|_$', '', key)  # drop underscores at the beginning and end
     return key
 
 
-def sanitize_street_type(street_type):
+def normalize_street_type(street_type):
     types = {
         'AV': ['ave', 'avenue'],
         'BV': ['blvd', 'boulevard'],
