@@ -26,13 +26,11 @@ def parse_markup(content):
         'images': [],
     }
     d = PyQuery(content)
-    simple_sections = ['quick', 'general']
-    for section in simple_sections:
-        rows = d('#{} table tr'.format(section))
-        for row in rows:
-            cells = row.findall('td')
-            key = sanitize_data_key(cells[0].text)
-            data[key] = cells[1].text
+    rows = d('#quick table tr, #general table tr')
+    for row in rows:
+        cells = row.findall('td')
+        key = sanitize_data_key(cells[0].text)
+        data[key] = cells[1].text
     headers = []
     for num, row in enumerate(d('#improvements table tr')):
         if num == 0:
