@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <div>
+            <form action="{% url 'address_lookup'%}" method="post">
+            {{form.as_p}}
+            {% csrf_token %}
+            <button type="submit">Lookup address</button>
+            </form>
+        </div>
+        {% if property %}
+        <div>{{property}}</div>
+        {% endif %}
+    </body>
+</html>
