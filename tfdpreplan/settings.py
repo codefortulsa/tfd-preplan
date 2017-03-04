@@ -25,7 +25,9 @@ SECRET_KEY = 'v2kmz0_k+oj4!5w=nob#y0i-t#=q67ni6_2o2r#h03-5q!aj=s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'tfd-preplan.herokuapp.com',
+]
 
 
 # Application definition
