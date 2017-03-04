@@ -3,3 +3,5 @@ db.sqlite3
 *.orig
 __pycache__
 *.pyc
+*.iml
+.idea/
