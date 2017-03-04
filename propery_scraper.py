@@ -1,4 +1,7 @@
+import re
+
 import requests
+from pyquery import PyQuery
 
 
 def get_property_data(street_no, street_dir, street_name, street_type):
@@ -12,7 +15,44 @@ def get_property_data(street_no, street_dir, street_name, street_type):
         'accepted': 'accepted',
     }
 
-    return requests.post(source_url, data=data)
+    resp = requests.post(source_url, data=data)
+    data = parse_markup(resp.content)
+    return data
+
+
+def parse_markup(content):
+    data = {
+        'improvements': [],
+        'images': [],
+    }
+    d = PyQuery(content)
+    simple_sections = ['quick', 'general']
+    for section in simple_sections:
+        rows = d('#{} table tr'.format(section))
+        for row in rows:
+            cells = row.findall('td')
+            key = sanitize_data_key(cells[0].text)
+            data[key] = cells[1].text
+    headers = []
+    for num, row in enumerate(d('#improvements table tr')):
+        if num == 0:
+            headers = [sanitize_data_key(c.text) for c in row.findall('th')]
+        else:
+            cells = row.findall('td')
+            data_row = {}
+            for i, cell in enumerate(cells):
+                data_row[headers[i]] = cell.text
+            data['improvements'].append(data_row)
+    data['images'] = [i.attrib['src'] for i in d('#images table img')]
+    return data
+
+
+def sanitize_data_key(key):
+    key = key.lower()
+    key = re.sub(r'[^a-z0-9_]', '_', key)
+    key = re.sub(r'_+', '_', key)
+    key = re.sub(r'^_|_$', '', key)
+    return key
 
 
 def sanitize_street_type(street_type):
