@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,7 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'v2kmz0_k+oj4!5w=nob#y0i-t#=q67ni6_2o2r#h03-5q!aj=s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+try:
+    django_debug = os.environ['DJANGO_DEBUG']
+    DEBUG = django_debug
+except Exception as e:
+    DEBUG = True
 
 ALLOWED_HOSTS = [
     'tfd-preplan.herokuapp.com',
@@ -117,8 +123,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
+# Static asset configuration
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
