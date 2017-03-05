@@ -1,1 +1,19 @@
-Dammit
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div class="jumbotron">
+    <h1>Welcome to the TFD Preplan</h1>
+    <p>
+    This app gathers online information for first responders to learn about locations they may visit.
+    It is joint project with the Tulsa Fire Department and Code for Tulsa.</p>
+    <p> If you are interested in helping build this app, please join our
+        <a href="https://www.meetup.com/Code-for-Tulsa/"
+        target="_blank"
+        >meetup.</a>
+    </p>
+    <p><a class="btn btn-primary btn-lg" href="/lookup" role="button">LOOK UP AN ADDRESS</a></p>
+    </div>
+
+{% endblock %}
