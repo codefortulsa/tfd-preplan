@@ -4,24 +4,15 @@
 
 {% block content %}
 
-<html>
-<head>
-    <title>Bootstrap Case</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-</head>
-<body>
-    <div class="container">
+
+<div class="container">
     <ul class="nav nav-pills">
         <li class="active"><a data-toggle="pill" href="#search">Search</a></li>
-        <li><a href="#crits">Critical Info</a></li>
-        <li><a href="#improvements">Improvements</a></li>
-        <li><a href="#images">Images</a></li>
-        <li><a href="#map">Map</a></li>
-        <li><a href="#satellite">Satellite</a></li>
+        <li><a data-toggle="pill" href="#crits">Critical Info</a></li>
+        <li><a data-toggle="pill" href="#improvements">Improvements</a></li>
+        <li><a data-toggle="pill" href="#images">Images</a></li>
+        <li><a data-toggle="pill" href="#map">Map</a></li>
+        <li><a data-toggle="pill" href="#satellite">Satellite</a></li>
     </ul>
     <div class="tab-content">
         <div id="search" class="tab-pane fade in active">
@@ -60,7 +51,6 @@
                 {% endfor %}
             </ul>
         </div>
-        {% endif %}
 
         <div id="map" class="tab-pane fade">
             <a target="_blank" href="{{map_url}}">Google Maps Link</a>
@@ -68,9 +58,9 @@
         <div id="satellite" class="tab-pane fade">
             <a target="_blank" href="{{map_url}}">Google Maps Link</a>
         </div>
+        {% endif %}
     </div>
-    </div>
-    </body>
-</html>
+</div>
+
 
 {% endblock %}
