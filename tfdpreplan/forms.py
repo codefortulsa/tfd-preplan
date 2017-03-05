@@ -8,14 +8,15 @@ from .utils import normalize_street_type
 
 
 class AddressForm(forms.Form):
-    street_no = forms.IntegerField(min_value=0)
-    street_dir = forms.RegexField(regex=r'^[NORnorSOUsouTHthEAeaWEweSTst]+$', min_length=1, error_message="Not a valid direction, check your spelling.")
-    street_name = forms.RegexField(regex=r'^[\w+ \'&\.]+', min_length=1, error_message="Not a valid street name.  Check for special characters.")
-    street_type = forms.RegexField(regex=r'^[\w+]+', min_length=1, error_message="Not a valid street type.  Check for special characters.")
+    street_no = forms.IntegerField(min_value=0, widget=forms.TextInput(attrs={"size":"7"}))
+    street_dir = forms.RegexField(regex=r'^[\w]+$', max_length=5, widget=forms.TextInput(attrs={"size":"5"}))
+    street_name = forms.RegexField(regex=r'^[\w+ \'&\.]+', min_length=1)
+    street_type = forms.RegexField(regex=r'^[\w+]+', min_length=1, widget=forms.TextInput(attrs={"size":"5"}))
 
 
     def clean_address(self):
-        self.cleaned_data['address'] = "%d %s %s %s".format(self.cleaned_data['street_no'], self.cleaned_data['street_dir'], self.cleaned_data['street_name'], self.cleaned_data['street_type'])
+        # import ipdb; ipdb.set_trace()
+        self.cleaned_data['address'] = "%d %s %s %s" % (self.cleaned_data['street_no'], self.cleaned_data['street_dir'], self.cleaned_data['street_name'], self.cleaned_data['street_type'])
 
         parser = StreetAddressParser()
         parts = parser.parse(self.cleaned_data['address'])

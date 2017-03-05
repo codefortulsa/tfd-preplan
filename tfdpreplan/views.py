@@ -14,6 +14,8 @@ class AddressLookupView(FormView):
     form_class = AddressForm
 
     def form_valid(self, form):
+        form.clean_address()
+
         data = get_property_data(
             form.cleaned_data['street_no'], form.cleaned_data['street_dir'],
             form.cleaned_data['street_name'], form.cleaned_data['street_type'])

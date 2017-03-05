@@ -16,8 +16,10 @@
     </ul>
     <div class="tab-content">
         <div id="search" class="tab-pane fade in active">
-            <form action="{% url 'address_lookup'%}" method="post">
-            {{form.as_p}}
+            <form action="{% url 'address_lookup'%}" method="post" id="search-form">
+                <ul class="list-inline">
+                    {{form.as_ul}}
+                </ul>
             {% csrf_token %}
             <button type="submit">Lookup address</button>
             </form>
@@ -63,5 +65,8 @@
     </div>
 </div>
 
+{% endblock %}
 
+{% block scripts %}
+<script type="text/javascript" src="{% static '/js/prevalidate.js' %}"></script>
 {% endblock %}
