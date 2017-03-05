@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container">
+    <ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="#search">Search</a></li>
+        <li><a data-toggle="pill" href="#crits">Critical Info</a></li>
+        <li><a data-toggle="pill" href="#improvements">Improvements</a></li>
+        <li><a data-toggle="pill" href="#images">Images</a></li>
+        <li><a data-toggle="pill" href="#map">Map</a></li>
+        <li><a data-toggle="pill" href="#satellite">Satellite</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="search" class="tab-pane fade in active">
+            <form action="{% url 'address_lookup'%}" method="post">
+            {{form.as_p}}
+            {% csrf_token %}
+            <button type="submit">Lookup address</button>
+            </form>
+        </div>
+        {% if property %}
+        <div id="crits" class="tab-pane fade">
+            <h2>Critical Info</h2>
+            <ul>
+                <li><b>Address:</b> {{property.situs_address}}</li>
+                <li><b>Owner address the same?</b> {% if property.situs_address == property.owner_address %}<i>Yes</i>{% else %}No{% endif %}</li>
+                <li><b>Owner Name:</b> {{property.owner_name}}</li>
+                <li><b>Fair Market Cash Value:</b> {{property.fair_cash_market_value}}</li>
+                <li><b>Land Area:</b> {{property.land_area}}</li>
+                <li><b>Zoning:</b> {{property.zoning}}</li>
+            </ul>
+        </div>
+        <div id="improvements" class="tab-pane fade">
+           <h1>Improvements/Modifications</h1>
+            <ol>
+            {% for improvement in property.improvements %}
+                {% for key,value in improvement.items %}
+                <li><b>{{key}}</b> {{value}}</li>
+                {% endfor %}
+            {% endfor %}
+            </ol>
+        </div>
+        <div id="images" class="tab-pane fade">
+            <h1>Images</h1>
+            <ul>
+                {% for image in property.images %}
+                <li><img src="{{image}}" /></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="map" class="tab-pane fade">
+            <a target="_blank" href="{{map_url}}">Google Maps Link</a>
+        </div>
+        <div id="satellite" class="tab-pane fade">
+            <a target="_blank" href="{{map_url}}">Google Maps Link</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

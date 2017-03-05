@@ -11,7 +11,7 @@ A project to combine data sources and provide responders with property details.
 ## Tulsa County Assessor Site
 
 The Tulsa County assessor makes property information available a this [property search](
-http://www.assessor.tulsacounty.org/assessor-property-search.php)link.
+http://www.assessor.tulsacounty.org/assessor-property-search.php) link.
 
 
 

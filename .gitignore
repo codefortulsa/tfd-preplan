@@ -1,1 +1,7 @@
 db.sqlite3
+*.swp
+*.orig
+__pycache__
+*.pyc
+*.iml
+.idea/
