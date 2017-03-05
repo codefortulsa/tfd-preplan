@@ -27,6 +27,7 @@
             <h2>Critical Info</h2>
             <ul>
                 <li><b>Address:</b> {{property.situs_address}}</li>
+                <li><b>Owner address the same?</b> {% if property.situs_address == property.owner_address %}<i>Yes</i>{% else %}No{% endif %}</li>
                 <li><b>Owner Name:</b> {{property.owner_name}}</li>
                 <li><b>Fair Market Cash Value:</b> {{property.fair_cash_market_value}}</li>
                 <li><b>Land Area:</b> {{property.land_area}}</li>
