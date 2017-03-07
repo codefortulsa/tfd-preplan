@@ -8,16 +8,20 @@
 <div class="container">
     <ul class="nav nav-pills">
         <li class="active"><a data-toggle="pill" href="#search">Search</a></li>
+
+        {% if property %}
         <li><a data-toggle="pill" href="#crits">Critical Info</a></li>
-        <li><a data-toggle="pill" href="#improvements">Improvements</a></li>
         <li><a data-toggle="pill" href="#images">Images</a></li>
         <li><a data-toggle="pill" href="#map">Map</a></li>
         <li><a data-toggle="pill" href="#satellite">Satellite</a></li>
+        {% endif %}
     </ul>
     <div class="tab-content">
         <div id="search" class="tab-pane fade in active">
-            <form action="{% url 'address_lookup'%}" method="post">
-            {{form.as_p}}
+            <form action="{% url 'address_lookup'%}" method="post" id="search-form">
+                <ul class="list-inline">
+                    {{form.as_ul}}
+                </ul>
             {% csrf_token %}
             <button type="submit">Lookup address</button>
             </form>
@@ -27,15 +31,14 @@
             <h2>Critical Info</h2>
             <ul>
                 <li><b>Address:</b> {{property.situs_address}}</li>
-                <li><b>Owner address the same?</b> {% if property.situs_address == property.owner_address %}<i>Yes</i>{% else %}No{% endif %}</li>
                 <li><b>Owner Name:</b> {{property.owner_name}}</li>
+                <li><b>Owner address the same?</b> {% if property.situs_address == property.owner_address %}<i>Yes</i>{% else %}No{% endif %}</li>
                 <li><b>Fair Market Cash Value:</b> {{property.fair_cash_market_value}}</li>
                 <li><b>Land Area:</b> {{property.land_area}}</li>
                 <li><b>Zoning:</b> {{property.zoning}}</li>
             </ul>
-        </div>
-        <div id="improvements" class="tab-pane fade">
-           <h1>Improvements/Modifications</h1>
+
+            <h2>Improvements/Modifications</h2>
             <ol>
             {% for improvement in property.improvements %}
                 {% for key,value in improvement.items %}
@@ -64,4 +67,13 @@
 </div>
 
 
+{% endblock %}
+
+{% block script %}
+    {% if property %}
+    <script type="text/javascript">
+        $('a[href="#crits"]').tab('show');
+    </script>
+    {% endif %}
+    <script type="text/javascript" src="{% static '/js/prevalidate.js' %}"></script>
 {% endblock %}
