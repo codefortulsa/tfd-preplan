@@ -18,8 +18,10 @@
     </ul>
     <div class="tab-content">
         <div id="search" class="tab-pane fade in active">
-            <form action="{% url 'address_lookup'%}" method="post">
-            {{form.as_p}}
+            <form action="{% url 'address_lookup'%}" method="post" id="search-form">
+                <ul class="list-inline">
+                    {{form.as_ul}}
+                </ul>
             {% csrf_token %}
             <button type="submit">Lookup address</button>
             </form>
@@ -42,7 +44,7 @@
                 {% for key,value in improvement.items %}
                 <li><b>{{key}}</b> {{value}}</li>
                 {% endfor %}
-                {% endfor %}
+            {% endfor %}
             </ol>
         </div>
         <div id="images" class="tab-pane fade">
