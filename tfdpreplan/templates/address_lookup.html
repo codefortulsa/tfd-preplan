@@ -40,7 +40,7 @@
 
             <h2>Improvements/Modifications</h2>
             <ol>
-                {% for improvement in property.improvements %}
+            {% for improvement in property.improvements %}
                 {% for key,value in improvement.items %}
                 <li><b>{{key}}</b> {{value}}</li>
                 {% endfor %}
@@ -74,4 +74,5 @@
         $('a[href="#crits"]').tab('show');
     </script>
     {% endif %}
+    <script type="text/javascript" src="{% static '/js/prevalidate.js' %}"></script>
 {% endblock %}

@@ -24,7 +24,6 @@ function onKeyDownFilter(event, re, next, spaceAllowedFor) {
 
             break;
         default:
-            console.log(keyCode);
             var regex = new RegExp(re);
             var key = event.key;
             if (!regex.test(key)) {
