@@ -92,4 +92,3 @@ def normalize_street_type(street_type):
                 street_type = st
                 break
     return street_type
-
