@@ -10,8 +10,11 @@
         <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     </head>
     <body>
-
-        {% block content %}{% endblock %}
+        {% block page %}
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+        {% endblock page %}
 
         <script src="{% static "js/jquery.min.js" %}"></script>
         <script src="{% static "js/bootstrap.min.js" %}"></script>

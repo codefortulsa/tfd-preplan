@@ -3,12 +3,8 @@
 {% load static %}
 
 {% block content %}
-
-
-<div class="container">
     <ul class="nav nav-pills">
         <li class="active"><a data-toggle="pill" href="#search">Search</a></li>
-
         {% if property %}
         <li><a data-toggle="pill" href="#crits">Critical Info</a></li>
         <li><a data-toggle="pill" href="#images">Images</a></li>
@@ -64,8 +60,6 @@
         </div>
         {% endif %}
     </div>
-</div>
-
 {% endblock %}
 
 {% block script %}
