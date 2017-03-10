@@ -5,6 +5,8 @@ from .forms import AddressForm
 from .utils import get_property_data
 from urllib import urlencode
 
+from  .tfd_geocoder import getCoordinates
+
 class Home(TemplateView):
     template_name = 'home.html'
 
@@ -19,5 +21,13 @@ class AddressLookupView(FormView):
         data = get_property_data(
             form.cleaned_data['street_no'], form.cleaned_data['street_dir'],
             form.cleaned_data['street_name'], form.cleaned_data['street_type'])
-        parsed_url = 'https://maps.google.com/?' + urlencode({'q': form.cleaned_data['address'] + ' Tulsa OK'})
-        return self.render_to_response(self.get_context_data(form=form, property=data, map_url=parsed_url))
+
+
+        coordinates = getCoordinates(form.cleaned_data['address'])
+        import ipdb; ipdb.set_trace()
+
+        return self.render_to_response(
+            self.get_context_data(
+                form=form, property=data, coordinates=coordinates
+            )
+        )
