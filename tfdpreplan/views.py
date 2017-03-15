@@ -1,9 +1,15 @@
 from django.views.generic import FormView, TemplateView
 from django.conf import settings
+from django.http import HttpResponse
+from django.views import View
 
 from .forms import AddressForm
 from .utils import get_property_data
 from urllib import urlencode
+
+from settings import MAPBOX_TOKEN
+
+from  .tfd_geocoder import getCoordinates
 
 class Home(TemplateView):
     template_name = 'home.html'
@@ -15,9 +21,21 @@ class AddressLookupView(FormView):
 
     def form_valid(self, form):
         form.clean_address()
-
         data = get_property_data(
             form.cleaned_data['street_no'], form.cleaned_data['street_dir'],
             form.cleaned_data['street_name'], form.cleaned_data['street_type'])
-        parsed_url = 'https://maps.google.com/?' + urlencode({'q': form.cleaned_data['address'] + ' Tulsa OK'})
-        return self.render_to_response(self.get_context_data(form=form, property=data, map_url=parsed_url))
+
+        coords = getCoordinates(form.cleaned_data['address'])
+        return self.render_to_response(
+            self.get_context_data(
+                form=form, property=data, coordinates=coords,
+                MAPBOX_TOKEN=MAPBOX_TOKEN,
+            )
+        )
+
+# This view works but is not used
+class StreetMap (View):
+    def get(self, request, *args, **kwargs):
+        street_address=self.kwargs['address']
+        mapHTML = getSlippyMap(street_address)
+        return HttpResponse(mapHTML)

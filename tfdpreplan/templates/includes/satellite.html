@@ -1,0 +1,11 @@
+
+<div id='satellite' style='width: 400px; height: 300px;'></div>
+<script>
+    mapboxgl.accessToken = '{{MAPBOX_TOKEN}}'
+    var map = new mapboxgl.Map({
+        container: 'satellite',
+        style: 'mapbox://styles/mapbox/satellite-v9',
+        center: {{coordinates}},
+        zoom: 17
+    });
+</script>

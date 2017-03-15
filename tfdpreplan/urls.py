@@ -20,5 +20,9 @@ from . import views
 urlpatterns = [
     url(r'^$', views.Home.as_view(), name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^lookup$', views.AddressLookupView.as_view(), name='address_lookup'),
+    url(r'^lookup$', views.AddressLookupView.as_view(),
+        name='address_lookup'),
+    url(r'^map/(?P<address>[^/.]+)',
+        views.StreetMap.as_view(), name='street-map'),
+
 ]
