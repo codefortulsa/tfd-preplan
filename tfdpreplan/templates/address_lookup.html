@@ -12,8 +12,8 @@
         {% if property %}
         <li><a data-toggle="pill" href="#crits">Critical Info</a></li>
         <li><a data-toggle="pill" href="#images">Images</a></li>
-        <li><a data-toggle="pill" href="#map">Map</a></li>
-        <li><a data-toggle="pill" href="#satellite">Satellite</a></li>
+        <li><a data-toggle="pill" href="#map_pane">Map</a></li>
+        <li><a data-toggle="pill" href="#satellite_pane">Satellite</a></li>
         {% endif %}
     </ul>
     <div class="tab-content">
@@ -55,12 +55,11 @@
                 {% endfor %}
             </ul>
         </div>
-
-        <div id="map" class="tab-pane fade">
-            <a target="_blank" href="{{map_url}}">Google Maps Link</a>
+        <div id="map_pane" class="tab-pane fade">
+            {% include "includes/map.html" %}
         </div>
-        <div id="satellite" class="tab-pane fade">
-            <a target="_blank" href="{{map_url}}">Google Maps Link</a>
+        <div id="satellite_pane" class="tab-pane fade">
+            {% include "includes/satellite.html" %}
         </div>
         {% endif %}
     </div>
