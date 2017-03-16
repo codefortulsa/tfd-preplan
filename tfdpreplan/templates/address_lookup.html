@@ -8,8 +8,7 @@
 <div class="container">
     <ul class="nav nav-pills">
         <li class="active"><a data-toggle="pill" href="#search">Search</a></li>
-
-        {% if property %}
+        {% if property.images %}
         <li><a data-toggle="pill" href="#crits">Critical Info</a></li>
         <li><a data-toggle="pill" href="#images">Images</a></li>
         <li><a data-toggle="pill" href="#map_pane">Map</a></li>
@@ -26,7 +25,28 @@
             <button type="submit">Lookup address</button>
             </form>
         </div>
-        {% if property %}
+        {% if property.pickone %}
+        <div id="mult">
+            <h2>Mutliple Accounts Found</h2>
+            <table>
+                <tr>
+                    <th>Account</th>
+                    <th>Owner</th>
+                    <th>No</th>
+                    <th>Dir</th>
+                    <th>Street</th>
+                    <th>End</th>
+                </tr>
+                {% for account in property.pickone %}
+                <tr>
+                    {% for element in account %}
+                    <td>{{ element }}</td>
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+        {% if property.images %}
         <div id="crits" class="tab-pane fade">
             <h2>Critical Info</h2>
             <ul>
