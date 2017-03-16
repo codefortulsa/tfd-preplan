@@ -1,0 +1,4 @@
+# development requirements
+
+pip-tools
+django-debug-toolbar
