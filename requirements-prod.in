@@ -1,0 +1,4 @@
+# heroku requirements
+
+dj-static==0.0.6
+gunicorn==19.7.0
