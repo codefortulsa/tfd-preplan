@@ -8,6 +8,7 @@ from .utils import get_property_data
 from urllib import urlencode
 
 from settings import MAPBOX_TOKEN
+from settings import GOOGLE_KEY
 
 from  .tfd_geocoder import getCoordinates
 
@@ -30,6 +31,7 @@ class AddressLookupView(FormView):
             self.get_context_data(
                 form=form, property=data, coordinates=coords,
                 MAPBOX_TOKEN=MAPBOX_TOKEN,
+                GOOGLE_KEY=GOOGLE_KEY
             )
         )
 

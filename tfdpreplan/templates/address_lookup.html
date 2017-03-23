@@ -44,7 +44,7 @@
                 {% for key,value in improvement.items %}
                 <li><b>{{key}}</b> {{value}}</li>
                 {% endfor %}
-                {% endfor %}
+            {% endfor %}
             </ol>
         </div>
         <div id="images" class="tab-pane fade">
@@ -59,7 +59,6 @@
             {% include "includes/map.html" %}
         </div>
         <div id="satellite_pane" class="tab-pane fade">
-            {% include "includes/satellite.html" %}
         </div>
         {% endif %}
     </div>
@@ -74,4 +73,6 @@
     </script>
     {% endif %}
     <script type="text/javascript" src="{% static '/js/prevalidate.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/google_map.js' %}"></script>
+
 {% endblock %}

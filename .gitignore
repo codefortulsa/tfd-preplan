@@ -7,3 +7,4 @@ __pycache__
 .idea/
 staticfiles
 .env
+**.DS_store

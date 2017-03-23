@@ -1,13 +1,5 @@
+    <div id="map"></div>
 
-<div id='map' style='width: 400px; height: 300px;'></div>
-
-
-<script>
-    mapboxgl.accessToken = '{{MAPBOX_TOKEN}}'
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
-        center: {{coordinates}},
-        zoom: 17
-    });
-</script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_KEY}}&callback=initMap">
+    </script>
