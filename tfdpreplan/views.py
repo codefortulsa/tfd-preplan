@@ -7,7 +7,6 @@ from .forms import AddressForm
 from .utils import get_property_data
 from urllib import urlencode
 
-from settings import MAPBOX_TOKEN
 from settings import GOOGLE_KEY
 
 from  .tfd_geocoder import getCoordinates
