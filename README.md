@@ -30,3 +30,8 @@ python
 1. Make a virtual environment and activate
 2. `pip install -r requirements.txt`
 3. `python manage.py runserver`
+
+
+## Reference
+
+[Aerial Map example by Google](https://developers.google.com/maps/documentation/javascript/examples/aerial-rotation)
