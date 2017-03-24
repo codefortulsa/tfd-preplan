@@ -22,7 +22,7 @@
                 </ul>
             {% csrf_token %}
             <button type="submit">Lookup address</button>
-            {{coordinates}}
+            <input id="address" type="hidden" value="{{address}}">
             <input id="coordinates" type="hidden" value="{{coordinates}}">
             </form>
         </div>

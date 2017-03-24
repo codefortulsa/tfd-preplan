@@ -27,12 +27,13 @@ SECRET_KEY = 'v2kmz0_k+oj4!5w=nob#y0i-t#=q67ni6_2o2r#h03-5q!aj=s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-try:
-    django_debug = os.environ['DJANGO_DEBUG']
-    DEBUG = django_debug
-except Exception as e:
-    pass
-# DEBUG = True
+# try:
+#     django_debug = os.environ['DJANGO_DEBUG']
+#     DEBUG = django_debug
+# except Exception as e:
+#     pass
+
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'tfd-preplan.herokuapp.com',

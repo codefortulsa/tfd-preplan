@@ -1,9 +1,10 @@
 var map;
 
 function initMap() {
-    debugger
 
     coordinates = JSON.parse($("#coordinates").val())
+    address = $("#address").val()
+
     center = {lng:coordinates[0], lat:coordinates[1]}
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -13,6 +14,13 @@ function initMap() {
         heading: 90,
         tilt: 45
     });
+
+    var marker = new google.maps.Marker({
+      position: center,
+      map: map,
+      title: address
+    });
+
 }
 
 function rotate90() {
