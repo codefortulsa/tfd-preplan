@@ -33,7 +33,7 @@ SECRET_KEY = 'v2kmz0_k+oj4!5w=nob#y0i-t#=q67ni6_2o2r#h03-5q!aj=s'
 # except Exception as e:
 #     pass
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'tfd-preplan.herokuapp.com',
@@ -136,6 +136,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+
+# MAPBOX
+MAPBOX_TOKEN = config('MAPBOX_TOKEN')
 
 # GOOGLE
 GOOGLE_KEY = config("GOOGLE_KEY")
