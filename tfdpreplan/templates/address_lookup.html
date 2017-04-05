@@ -4,7 +4,6 @@
 
 {% block content %}
 
-
 <div class="container">
     <ul class="nav nav-pills">
         <li class="active"><a data-toggle="pill" href="#search">Search</a></li>
@@ -13,7 +12,6 @@
         <li><a data-toggle="pill" href="#crits">Critical Info</a></li>
         <li><a data-toggle="pill" href="#images">Images</a></li>
         <li><a data-toggle="pill" href="#map_pane">Map</a></li>
-        <li><a data-toggle="pill" href="#satellite_pane">Satellite</a></li>
         {% endif %}
     </ul>
     <div class="tab-content">
@@ -24,6 +22,8 @@
                 </ul>
             {% csrf_token %}
             <button type="submit">Lookup address</button>
+            <input id="address" type="hidden" value="{{address}}">
+            <input id="coordinates" type="hidden" value="{{coordinates}}">
             </form>
         </div>
         {% if property %}
@@ -44,7 +44,7 @@
                 {% for key,value in improvement.items %}
                 <li><b>{{key}}</b> {{value}}</li>
                 {% endfor %}
-                {% endfor %}
+            {% endfor %}
             </ol>
         </div>
         <div id="images" class="tab-pane fade">
@@ -56,10 +56,7 @@
             </ul>
         </div>
         <div id="map_pane" class="tab-pane fade">
-            {% include "includes/map.html" %}
-        </div>
-        <div id="satellite_pane" class="tab-pane fade">
-            {% include "includes/satellite.html" %}
+            <div id="map" style='width: 400px; height: 400px;'></div>
         </div>
         {% endif %}
     </div>
@@ -74,4 +71,9 @@
     </script>
     {% endif %}
     <script type="text/javascript" src="{% static '/js/prevalidate.js' %}"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_KEY}}&callback=initMap">
+    </script>
+    <script type="text/javascript" src="{% static '/js/google_map.js' %}"></script>
+
 {% endblock %}

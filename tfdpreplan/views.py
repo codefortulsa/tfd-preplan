@@ -7,7 +7,7 @@ from .forms import AddressForm
 from .utils import get_property_data
 from urllib import urlencode
 
-from settings import MAPBOX_TOKEN
+from settings import GOOGLE_KEY
 
 from  .tfd_geocoder import getCoordinates
 
@@ -25,11 +25,14 @@ class AddressLookupView(FormView):
             form.cleaned_data['street_no'], form.cleaned_data['street_dir'],
             form.cleaned_data['street_name'], form.cleaned_data['street_type'])
 
-        coords = getCoordinates(form.cleaned_data['address'])
+        address = form.cleaned_data['address']
+        coords = getCoordinates(address)
         return self.render_to_response(
             self.get_context_data(
-                form=form, property=data, coordinates=coords,
-                MAPBOX_TOKEN=MAPBOX_TOKEN,
+                form=form, property=data,
+                coordinates=coords,
+                address = address,
+                GOOGLE_KEY=GOOGLE_KEY
             )
         )
 

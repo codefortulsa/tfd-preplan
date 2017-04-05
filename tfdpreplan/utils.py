@@ -25,32 +25,48 @@ def get_property_data(street_no, street_dir, street_name, street_type):
 
 def parse_markup(content):
     data = {
-        'improvements': [],
-        'images': [],
+        'pickone': [],
     }
     d = PyQuery(content)
-
-    # get quick and general data
-    rows = d('#quick table tr, #general table tr')
-    for row in rows:
-        cells = row.findall('td')
-        key = normalize_data_key(cells[0].text)
-        data[key] = cells[1].text
-
-    # get Improvements entries
-    headers = []
-    for num, row in enumerate(d('#improvements table tr')):
-        if num == 0:
-            headers = [normalize_data_key(c.text) for c in row.findall('th')]
-        else:
+    # determine whether we have multiple accounts
+    # Let me know if there is a prettier way to do this!
+    rows = d('#pickone tbody tr')
+    if rows:
+        pickoneTable = []
+        for row in rows:
             cells = row.findall('td')
-            data_row = {}
-            for i, cell in enumerate(cells):
-                data_row[headers[i]] = cell.text
-            data['improvements'].append(data_row)
+            pickoneRow = []
+            for cell in cells:
+                pickoneRow.append(cell.text)
+            pickoneTable.append(pickoneRow)
+        data['pickone'] = pickoneTable
 
-    # get image urls
-    data['images'] = [i.attrib['src'] for i in d('#images table img')]
+    else:
+        data = {
+            'improvements': [],
+            'images': [],
+        }
+        # get quick and general data
+        rows = d('#quick table tr, #general table tr')
+        for row in rows:
+            cells = row.findall('td')
+            key = normalize_data_key(cells[0].text)
+            data[key] = cells[1].text
+
+        # get Improvements entries
+        headers = []
+        for num, row in enumerate(d('#improvements table tr')):
+            if num == 0:
+                headers = [normalize_data_key(c.text) for c in row.findall('th')]
+            else:
+                cells = row.findall('td')
+                data_row = {}
+                for i, cell in enumerate(cells):
+                    data_row[headers[i]] = cell.text
+                data['improvements'].append(data_row)
+
+        # get image urls
+        data['images'] = [i.attrib['src'] for i in d('#images table img')]
 
     return data
 
@@ -92,4 +108,3 @@ def normalize_street_type(street_type):
                 street_type = st
                 break
     return street_type
-
