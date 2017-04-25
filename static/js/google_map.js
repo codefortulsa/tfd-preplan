@@ -29,5 +29,9 @@ function rotate90() {
 }
 
 $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+    var height = $( window ).height()
+    var width = $( window ).width()
+    $('#map').height(height*0.9)
+    $('#map').width(width*0.9)
     google.maps.event.trigger(map, "resize");
 });
