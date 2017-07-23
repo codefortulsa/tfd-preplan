@@ -35,3 +35,7 @@ python
 ## Reference
 
 [Aerial Map example by Google](https://developers.google.com/maps/documentation/javascript/examples/aerial-rotation)
+
+### Production branch
+
+Changes merged to the branch 'production' are automatically deployed to https://tfd-preplan.herokuapp.com.
